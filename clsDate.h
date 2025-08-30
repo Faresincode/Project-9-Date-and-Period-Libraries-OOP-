@@ -17,7 +17,7 @@ public:
 
 	clsDate()
 	{
-		time_t t = time(0);
+		time_t t = time(0);  // t variable  is mean that he get the number of total seconds from 1 January 1970 to now 
 		tm* Now = localtime(&t);
 
 		_Day = Now->tm_mday;
@@ -81,9 +81,9 @@ public:
 		return _Year;
 	}
 
-	__declspec(property(get = GetDay, put = SetDay)) short _Day;
-	__declspec(property(get = GetMonth, put = SetMonth)) short _Month;
-	__declspec(property(get = GetYear, put = SetYear)) short _Year;
+	__declspec(property(get = GetDay, put = SetDay)) short Day;
+	__declspec(property(get = GetMonth, put = SetMonth)) short Month;
+	__declspec(property(get = GetYear, put = SetYear)) short Year;
 
 	static clsDate GetSystemDate()
 	{
@@ -98,10 +98,10 @@ public:
 		return clsDate(Day, Month, Year);
 	}
 
-	static clsDate StringToDate(string DateString)
+	static clsDate StringToDate(string DateString,string DateDelimiter="/")
 	{
 		clsDate Date;
-		vector <string> vDate = clsString::Split(DateString, "/");
+		vector <string> vDate = clsString::Split(DateString, DateDelimiter);
 
 		Date._Day = stoi(vDate[0]);
 		Date._Month = stoi(vDate[1]);
@@ -1119,5 +1119,6 @@ public:
 		return GetDifferenceInDays(DateOfBirth, GetSystemDate());
 	}
 };
+
 
 
